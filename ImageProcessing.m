@@ -1,18 +1,19 @@
 calimage=ReadCalibrationData();
 
-[map,bandsize,number]=GenerateTheMap(calimage);
+[map,bandsize,number]=GenerateTheTiltedMap(calimage,15);
+%%[map,bandsize,number]=GenerateTheMap(calimage);
 map=floor(map);
 
 figure;imagesc(map(:,:,1));  %%different colors indicate differnt bands, bands are the continuous area between boundaries
 
-imagepath='C:\Users\gu\Desktop\myscripts\new_system\LOCI_v1p1Win32 - Copy\zstack-001\';
-imagename='zstack-001';
-channels=16;
-offset=0;
-%%imagepath='C:\Users\gu\Desktop\暑期科研\demo\data\threechannel\';
-%%imagename='JeffBeads70ms-005';
-%%channels=28;  %%40 original images, but 28 in use
-%%offset=5;  %%starting from No.5 to No.33
+%%imagepath='C:\Users\gu\Desktop\myscripts\new_system\LOCI_v1p1Win32 - Copy\zstack-001\';
+%%imagename='zstack-001';
+%%channels=16;
+%%offset=0;
+imagepath='C:\Users\gu\Desktop\暑期科研\demo\data\threechannel\';
+imagename='JeffBeads70ms-005';
+channels=28;  %%40 original images, but 28 in use
+offset=5;  %%starting from No.5 to No.33
 disp('Reading spectral images...');
 t1=clock;
 stack=ReadSpectralImages(imagepath,imagename,channels,offset,map,bandsize,number);

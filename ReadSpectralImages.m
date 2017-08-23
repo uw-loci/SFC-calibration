@@ -21,23 +21,14 @@ end
 start=sum(map(:,1,1)==1)+1; %%y starts from band 2, because band 1 is not a real band
 stop=512-sum(map(:,1,1)==max(map(:,1,1))); %%y stops at band 31, because band 32 is not a real band
 
-%%stack=zeros([channels*pinumber,512,16]);
 stack=zeros([channels*pinumber,512,bandsize]);
 %%lambda=zeros([channels*pinumber,512,bandsize]);
 
-%%a=start;
 for n=1:channels
-    for x=start:stop %%stop
+    for x=start:stop
             wavelength=map(x,1,2); %%bin is wavelength
-            %%bandn=map(x,1,1);
             bandn=2+floor((x-start)/15); %%bandnumber: belong to which pinhole/band
-            %%lastbandn=2;
-            binorder=sort(map(start+(bandn-2)*bandsize:start+(bandn-2)*bandsize+bandsize-1,1,2),'descend')';; %%binorder: wavelength in one band set in order
-            %%binorder=sort(map(a:a+sum(map(:,1,1)==bandn)-1,1,2),'descend')'; %%binorder: wavelength in one band set in order
-            %%if(bandn~=lastbandn)
-                %%a=a+sum(map(:,1,1)==bandn);
-                %%lastbandn=bandn;
-            %%end
+            binorder=sort(map(start+(bandn-2)*bandsize:start+(bandn-2)*bandsize+bandsize-1,1,2),'descend')'; %%binorder: wavelength in one band set in order
             bin=find(binorder==wavelength); %%bin: belong to which lambda bin
             %%stack(n+(bandn-2)*channels,1:512,bin)=stack1(x,1:512,n);
             %%lambda(n+(bandn-2)*channels,1:512,bin)=wavelength;
